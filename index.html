@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-
+<button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar">☰</button>
 <div class="layout-wrapper">
 
     <aside class="sidebar">
@@ -89,6 +89,29 @@
     </main>
 
 </div>
+<script>
+    const toggleBtn = document.getElementById('sidebarToggle');
+    const sidebar = document.querySelector('.sidebar');
 
+    toggleBtn.addEventListener('click', (e) => {
+        sidebar.classList.toggle('active');
+        toggleBtn.classList.toggle('active');
+        
+        if (sidebar.classList.contains('active')) {
+            toggleBtn.innerHTML = '✕';
+        } else {
+            toggleBtn.innerHTML = '☰';
+        }
+        e.stopPropagation();
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!sidebar.contains(e.target) && e.target !== toggleBtn) {
+            sidebar.classList.remove('active');
+            toggleBtn.classList.remove('active');
+            toggleBtn.innerHTML = '☰';
+        }
+    });
+</script>
 </body>
 </html>
